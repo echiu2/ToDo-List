@@ -1,0 +1,62 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+// This is just some CSS for the welcome home landing page, feel free to 
+// remove it.
+.welcome {
+    width: 700px;
+    margin: 0 auto;
+    
+    img { 
+        width: 300px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+.task-color {
+    color: rgb(120,196,220)
+}
+
+.navbar {
+    background-color: rgb(120,196,220)
+}
+
+a {
+    color: white;
+}
+
+.addTask-button {
+    background-color: rgb(120,196,220);
+    border: none
+}
+
+.thead {
+    background-color: #204464
+}
+
+.table-border {
+    border: 1px solid #f8f4f4;
+}
+
+.gray-text {
+    color: gray;
+    opacity: 0.5;
+}
+
+.red-text {
+    color: red;
+    opacity: 0.3;
+}
+
+html,body {
+   height: 100%
+}
+
+.footer-bottom {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 500px;
+ }

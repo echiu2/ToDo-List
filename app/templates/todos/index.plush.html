@@ -1,0 +1,64 @@
+<div>
+    <div style="height: 60vh; background-color: #f8f4f4">
+        <div class="mb-3">
+            <nav class="navbar navbar-expand-lg py-3">
+                <a class="navbar-brand mr-4" href="#"><h2>ToDo List</h2></a>
+                <div class="border-left">
+                    <p class="text-white ml-4 mt-3">4 Incompleted Tasks<br><small>Thursday 06, June 2019</small>
+                    </p>
+                </div>
+                <div class="collapse navbar-collapse d-flex" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Incomplete Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Completed Tasks</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-flex pr-5">
+            <button type="button" class="btn btn-dark mb-3 ml-auto btn-lg addTask-button">Add Task</button>
+        </div>
+        <div class="px-5">
+            <table class="table">
+                <thead class="thead">
+                <tr class="text-white">
+                    <th scope="col">Task</th>
+                    <th scope="col">Complete By</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody class="table-border" style="background-color: white;">
+                <tr>
+                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Client Meeting</th>
+                    <td>08 May 2019</td>
+                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Design App Interface</th>
+                    <td>15 May 2019</td>
+                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Learn Node.Js</th>
+                    <td>03 Sep 2019</td>
+                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Bring the puppy out XD</th>
+                    <td>24 Jul 2019</td>
+                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer-bottom" style="height: 40vh;">
+        <footer>
+            <p class=gray-text>Select a Task to view it</p>
+        </footer>
+    </div>
+</div>
