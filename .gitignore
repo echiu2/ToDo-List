@@ -1,5 +1,5 @@
 bin/
-/public/assets
+/public/assets/
 package-lock.json
 node_modules/
 .sass-cache/
