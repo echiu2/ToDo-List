@@ -1,2 +1,5 @@
-/bin
-public/assets
+bin/
+/public/assets
+package-lock.json
+node_modules/
+.sass-cache/
