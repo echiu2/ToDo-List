@@ -1,1 +1,1 @@
-drop_table("create_todo_tables")
+drop_table("todos")

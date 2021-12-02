@@ -1,7 +1,7 @@
 create_table("todos") {
-    t.Column("task_id", "uuid", {"default_raw" : "uuid_generate_v1()"})
-    t.Column("complete_By", "timestamp", {})
-    t.Column("is_Completed", "bool", {"default": false})
+    t.Column("id", "uuid", {primary: true})
+    t.Column("limit_date", "timestamp", {})
+    t.Column("is_completed", "bool", {"default": false})
     t.Column("title", "string", {"size": 100})
     t.Column("details", "text", {"null": true})
 }
