@@ -24,41 +24,26 @@
         </div>
         <div class="px-5">
             <table class="table">
-                <thead class="thead">
+                <thead>
                 <tr class="text-white">
                     <th scope="col">Task</th>
                     <th scope="col">Complete By</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
-                <tbody class="table-border" style="background-color: white;">
-                <tr>
-                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Client Meeting</th>
-                    <td>08 May 2019</td>
-                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Design App Interface</th>
-                    <td>15 May 2019</td>
-                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Learn Node.Js</th>
-                    <td>03 Sep 2019</td>
-                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
-                </tr>
-                <tr>
-                    <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i>Bring the puppy out XD</th>
-                    <td>24 Jul 2019</td>
-                    <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
-                </tr>
+                <tbody>
+                <%= for (index, todo) in todos { %>
+                    <tr>
+                        <td scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i><%= todo.Title %></td>
+                        <td class="limit-date"><%= todo.LimitDate.Format("Mon Jan 02") %></td>
+                        <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
+                    </tr>
+                <% } %>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="footer-bottom">
-        <footer>
-            <p class=gray-text>Select a Task to view it</p>
-        </footer>
-    </div>
 </div>
+
+<script>
+</script>

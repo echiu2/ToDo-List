@@ -33,12 +33,24 @@ a {
     border: none
 }
 
-.thead {
-    background-color: #204464
+thead th {
+    background-color: #204464;
 }
 
-.table-border {
-    border: 1px solid #f8f4f4;
+table {
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 3px;
+    border-style: hidden; 
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+thead th:first-of-type {
+    border-top-left-radius: 3px; 
+}
+
+thead th:last-of-type {
+    border-top-right-radius: 3px;
 }
 
 .gray-text {
@@ -56,7 +68,7 @@ html,body {
 }
 
 .todo-content {
-    height: 60vh;
+    height: 100vh;
     background-color: #f8f4f4;
 }
 
@@ -66,3 +78,11 @@ html,body {
     line-height: 500px;
     height: 40vh;
  }
+
+ .container-fluid {
+    padding-right:0;
+    padding-left:0;
+    margin-right:auto;
+    margin-left:auto
+ }
+ 
