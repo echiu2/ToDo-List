@@ -1,6 +1,6 @@
 create_table("todos") {
     t.Column("id", "uuid", {primary: true})
-    t.Column("limit_date", "timestamp", {})
+    t.Column("limit_date", "date", {})
     t.Column("is_completed", "bool", {"default": false})
     t.Column("title", "string", {"size": 100})
     t.Column("details", "text", {"null": true})
