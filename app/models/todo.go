@@ -2,9 +2,12 @@ package models
 
 import (
 	"time"
+
+	"github.com/gofrs/uuid/v3"
 )
 
 type Todo struct {
+	Id          uuid.UUID `db:"id" json:"id"`
 	LimitDate   time.Time `db:"limit_date" json:"limit_date"`
 	IsCompleted bool      `db:"is_completed" json:"is_completed"`
 	Title       string    `db:"title" json:"title"`

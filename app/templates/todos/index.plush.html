@@ -32,10 +32,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <%= for (index, value) in todos { %>
+                <%= for (index, todo) in todos { %>
                     <tr>
-                        <th scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i><%= todos[index].Title %></th>
-                        <td class="limit-date" id="limit-date-<%= index %>"><%= todos[index].LimitDate %></td>
+                        <td scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i><%= todo.Title %></td>
+                        <td class="limit-date"><%= todo.LimitDate.Format("Mon Jan 02") %></td>
                         <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
                     </tr>
                 <% } %>
@@ -46,16 +46,4 @@
 </div>
 
 <script>
-    function formatDate(date){
-        return date.substring(0, date.length-14)
-    }
-    
-    let dates = document.getElementsByClassName("limit-date")
-
-    for (let i =0; i<dates.length; i++){
-        let newDate = formatDate(dates[i].innerHTML)
-        console.log(newDate)
-        document.getElementById("limit-date-" + i).innerHTML = newDate
-    }
-
 </script>
