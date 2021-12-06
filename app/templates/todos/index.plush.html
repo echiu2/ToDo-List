@@ -2,7 +2,7 @@
     <div class="todo-content">
         <%= partial("partials/navbar.plush.html") %>
         <div class="d-flex pr-5">
-            <button type="button" class="btn btn-dark mb-3 ml-auto btn-lg addTask-button">Add Task</button>
+            <button type="button" class="btn btn-dark mb-3 ml-auto btn-lg addTask-button"><a href="<%= newTodoPath() %>">Add Task</a></button>
         </div>
         <div class="px-5">
             <table class="table">
@@ -17,7 +17,7 @@
                 <%= for (index, todo) in todos { %>
                     <tr>
                         <td scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i><%= todo.Title %></td>
-                        <td class="limit-date"><%= todo.LimitDate.Format("Mon Jan 02") %></td>
+                        <td class="limit-date"><%= todo.Deadline.Format("Mon Jan 02") %></td>
                         <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
                     </tr>
                 <% } %>

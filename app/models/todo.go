@@ -8,7 +8,7 @@ import (
 
 type Todo struct {
 	ID          uuid.UUID `db:"id" json:"id"`
-	LimitDate   time.Time `db:"limit_date" json:"limit_date"`
+	Deadline    time.Time `db:"deadline" json:"deadline"`
 	IsCompleted bool      `db:"is_completed" json:"is_completed"`
 	Title       string    `db:"title" json:"title"`
 	Details     string    `db:"details" json:"details"`
