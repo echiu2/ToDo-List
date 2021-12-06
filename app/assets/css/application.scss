@@ -28,7 +28,8 @@ a {
     color: white;
 }
 
-.addTask-button {
+
+.confirm-button {
     background-color: rgb(120,196,220);
     border: none
 }
@@ -119,4 +120,26 @@ html,body {
 
 .cancel-button {
     background-color: #fffcfc;
+}
+
+.modal {
+    text-align: center;
+    padding: 0!important;
+    height: 100%;
+}
+
+.modal-body {
+    padding-bottom: 40px;
+}
+  
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 20%;
+    vertical-align: middle;
+}
+
+.modal-dialog {
+    text-align: left;
+    vertical-align: middle;
 }

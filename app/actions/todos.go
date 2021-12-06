@@ -13,12 +13,14 @@ import (
 func Index(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	todos := models.Todos{}
+	todo := models.Todo{}
 
 	if err := tx.All(&todos); err != nil {
 		return c.Error(http.StatusInternalServerError, err)
 	}
 
 	c.Set("todos", todos)
+	c.Set("todo", todo)
 
 	return c.Render(http.StatusOK, r.HTML("/todos/index.plush.html"))
 }
@@ -81,6 +83,24 @@ func UpdateTask(c buffalo.Context) error {
 	err := tx.Update(&todo)
 	if err != nil {
 		return c.Error(http.StatusInternalServerError, errors.Wrap(err, "Update - error updating an existing todo object"))
+	}
+
+	return c.Redirect(http.StatusSeeOther, "/")
+}
+
+func DeleteTask(c buffalo.Context) error {
+	todoID := c.Param("todo_id")
+	todo := models.Todo{}
+
+	tx := c.Value("tx").(*pop.Connection)
+
+	if err := tx.Find(&todo, todoID); err != nil {
+		return c.Error(http.StatusNotFound, errors.Wrap(err, "Delete - error while finding todo object"))
+	}
+
+	err := tx.Destroy(&todo)
+	if err != nil {
+		return c.Error(http.StatusInternalServerError, errors.Wrap(err, "Delete - error while trying to delete an existing todo object"))
 	}
 
 	return c.Redirect(http.StatusSeeOther, "/")

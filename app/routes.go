@@ -19,5 +19,6 @@ func setRoutes(root *buffalo.App) {
 	root.POST("/todo", actions.SaveTask)
 	root.GET("/todo/{todo_id}/edit", actions.EditTask)
 	root.PUT("/todo/{todo_id}", actions.UpdateTask)
+	root.DELETE("/todo/{todo_id}", actions.DeleteTask)
 	root.ServeFiles("/", base.Assets)
 }
