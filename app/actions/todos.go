@@ -22,14 +22,14 @@ func Index(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.HTML("/todos/index.plush.html"))
 }
 
-func Save(c buffalo.Context) error {
+func NewTask(c buffalo.Context) error {
 	todo := models.Todo{}
 	c.Set("todo", todo)
 
 	return c.Render(http.StatusOK, r.HTML("todos/new.plush.html"))
 }
 
-func PostNewTask(c buffalo.Context) error {
+func Save(c buffalo.Context) error {
 	todo := models.Todo{}
 
 	if err := c.Bind(&todo); err != nil {
