@@ -56,7 +56,7 @@ func EditTask(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 
 	if err := tx.Find(&todo, todoID); err != nil {
-		return c.Error(http.StatusInternalServerError, errors.Wrap(err, "Edit - error while finding todo object"))
+		return c.Error(http.StatusNotFound, errors.Wrap(err, "Edit - error while finding todo object"))
 	}
 
 	c.Set("todo", todo)
@@ -71,7 +71,7 @@ func UpdateTask(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 
 	if err := tx.Find(&todo, todoID); err != nil {
-		return c.Error(http.StatusInternalServerError, errors.Wrap(err, "Edit - error while finding todo object"))
+		return c.Error(http.StatusNotFound, errors.Wrap(err, "Edit - error while finding todo object"))
 	}
 
 	if err := c.Bind(&todo); err != nil {
