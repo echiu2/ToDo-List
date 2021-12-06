@@ -2,6 +2,7 @@ package actions
 
 import (
 	"net/http"
+	"time"
 	"todolist/app/models"
 
 	"github.com/gobuffalo/buffalo"
@@ -17,14 +18,20 @@ func Index(c buffalo.Context) error {
 		return c.Error(http.StatusInternalServerError, err)
 	}
 
+	time := time.Now()
+
 	c.Set("todos", todos)
+	c.Set("time", time)
 
 	return c.Render(http.StatusOK, r.HTML("/todos/index.plush.html"))
 }
 
 func NewTask(c buffalo.Context) error {
 	todo := models.Todo{}
+	time := time.Now()
+
 	c.Set("todo", todo)
+	c.Set("time", time)
 
 	return c.Render(http.StatusOK, r.HTML("todos/new.plush.html"))
 }
