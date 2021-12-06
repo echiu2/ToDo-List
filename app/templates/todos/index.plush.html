@@ -18,7 +18,7 @@
                     <tr>
                         <td scope="row" class="task-color"><i class="fas fa-check-circle mr-3 gray-text"></i><%= todo.Title %></td>
                         <td class="limit-date"><%= todo.Deadline.Format("Mon Jan 02") %></td>
-                        <td><i class="fas fa-pencil-alt mr-3 gray-text"></i><i class="fas fa-trash-alt red-text"></i></td>
+                        <td><a href="<%= editTodoPath({todo_id: todo.ID}) %>"><i class="fas fa-pencil-alt mr-3 gray-text"></i></a><i class="fas fa-trash-alt red-text"></i></td>
                     </tr>
                 <% } %>
                 </tbody>

@@ -2,10 +2,10 @@
     <div class="todo-content">
         <%= partial("partials/navbar.plush.html") %>
         <div class="form-box">
-            <h2 class="new-task-label">New Task</h2>
-            <%= form_for(todo, {action: newTodoPath(), method: "POST"}) { %>
+            <h2 class="new-task-label">Edit Task</h2>
+            <%= form_for(todo, {action: todoPath({todo_id: todo.ID}) , method: "PUT"}) { %>
                 <%= partial("todos/form.plush.html", {
-                    btnText: "Create Task"
+                    btnText: "Edit Task"
                 }) %>
             <% } %>
         </div>   
