@@ -33,6 +33,16 @@ a {
     border: none
 }
 
+.createTask-buttons {
+    float: right;
+    padding-top: 15px;
+}
+
+.createTask-button {
+    background-color: rgb(120,196,220);
+    border: none
+}
+
 thead th {
     background-color: #204464;
 }
@@ -86,3 +96,23 @@ html,body {
     margin-left:auto
  }
  
+.form-box {
+    background-color: white;
+    margin-top: 100px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 30px;
+    padding-bottom: 90px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+.new-task-label {
+    padding-top: 20px; 
+    padding-bottom: 20px;
+}
+
+.cancel-button {
+    background-color: #fffcfc;
+}
