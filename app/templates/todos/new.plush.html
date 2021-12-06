@@ -1,0 +1,27 @@
+<div>
+    <div class="todo-content">
+        <%= partial("partials/navbar.plush.html") %>
+        <div class="form-box">
+            <h2 class="new-task-label">New Task</h2>
+            <%= form_for(todo, {action: "/todo", method: "POST"}) { %>
+            <div class="row">
+                <div class="col-md-6">
+                    <%= f.InputTag("Title") %>
+                </div>
+                <div class="col-md-6">
+                    <%= f.InputTag("LimitDate") %>
+                </div>
+                <div class="col-md-12">
+                    <%= f.TextArea("Details", {rows: 10}) %>
+                </div>
+            </div>
+            <div>
+                <span class="createTask-buttons">
+                    <button type="button" class="btn mb-3 ml-auto btn-lg cancel-button">Cancel</button>
+                    <input type="submit" class="btn btn-dark mb-3 ml-auto btn-lg createTask-button">
+                </span>
+            </div>
+            <% } %>
+        </div>   
+    </div>
+</div>
