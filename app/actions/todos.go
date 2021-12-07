@@ -13,14 +13,12 @@ import (
 func Index(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	todos := models.Todos{}
-	todo := models.Todo{}
 
 	if err := tx.All(&todos); err != nil {
 		return c.Error(http.StatusInternalServerError, err)
 	}
 
 	c.Set("todos", todos)
-	c.Set("todo", todo)
 
 	return c.Render(http.StatusOK, r.HTML("/todos/index.plush.html"))
 }

@@ -3,7 +3,7 @@
         <%= partial("partials/navbar.plush.html") %>
         <div class="form-box">
             <h2 class="new-task-label">New Task</h2>
-            <%= form_for(todo, {action: newTodoPath(), method: "POST"}) { %>
+            <%= form_for(todo, {action: createTaskPath(), method: "POST"}) { %>
                 <%= partial("todos/form.plush.html", {
                     btnText: "Create Task"
                 }) %>
