@@ -1,8 +1,11 @@
 package models
 
 import (
+	"fmt"
 	"time"
 
+	"github.com/gobuffalo/validate/v3"
+	"github.com/gobuffalo/validate/v3/validators"
 	"github.com/gofrs/uuid"
 )
 
@@ -20,4 +23,14 @@ type Todos []Todo
 
 func (t Todo) TableName() string {
 	return "todos"
+}
+
+func (t *Todo) Validate() *validate.Errors {
+	fmt.Println(time.Now().Truncate(24 * time.Hour))
+	return validate.Validate(
+		&validators.StringIsPresent{Field: t.Title, Name: "Title", Message: "Title cannot be empty"},
+		&validators.StringLengthInRange{Field: t.Details, Name: "Details", Min: 10, Message: "Details length must be 10 or larger"},
+		&validators.TimeIsPresent{Field: t.Deadline, Name: "Deadline", Message: "Deadline not a valid date"},
+		&validators.TimeAfterTime{FirstTime: t.Deadline, FirstName: "Deadline", SecondTime: time.Now().Truncate(24 * time.Hour), Message: "Deadline cannot be a past date or current date"},
+	)
 }
