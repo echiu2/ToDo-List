@@ -39,6 +39,12 @@ func SaveTask(c buffalo.Context) error {
 		return c.Error(http.StatusInternalServerError, errors.Wrap(err, "Save - error while binding to Todo"))
 	}
 
+	if verrs := todo.Validate(); verrs.HasAny() {
+		c.Set("todo", todo)
+		c.Set("errors", verrs.Errors)
+		return c.Render(http.StatusUnprocessableEntity, r.HTML("todos/new.plush.html"))
+	}
+
 	tx := c.Value("tx").(*pop.Connection)
 
 	err := tx.Create(&todo)
@@ -76,6 +82,12 @@ func UpdateTask(c buffalo.Context) error {
 
 	if err := c.Bind(&todo); err != nil {
 		return c.Error(http.StatusInternalServerError, errors.Wrap(err, "Edit - error while binding to Todo"))
+	}
+
+	if verrs := todo.Validate(); verrs.HasAny() {
+		c.Set("todo", todo)
+		c.Set("errors", verrs.Errors)
+		return c.Render(http.StatusUnprocessableEntity, r.HTML("todos/edit.plush.html"))
 	}
 
 	err := tx.Update(&todo)

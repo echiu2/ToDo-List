@@ -20,6 +20,10 @@
     color: rgb(120,196,220)
 }
 
+.task-button:hover {
+    color: rgb(120,196,220);
+}
+
 .navbar {
     background-color: rgb(120,196,220)
 }
@@ -34,6 +38,11 @@ a {
     border: none
 }
 
+.confirm-button:hover {
+    background-color: rgb(120,196,220);
+    filter: brightness(80%);
+}
+
 .createTask-buttons {
     float: right;
     padding-top: 15px;
@@ -42,6 +51,11 @@ a {
 .createTask-button {
     background-color: rgb(120,196,220);
     border: none
+}
+
+.createTask-button:hover {
+    background-color: rgb(120,196,220);
+    filter: brightness(80%);
 }
 
 thead th {
@@ -73,9 +87,17 @@ thead th:last-of-type {
     opacity: 0.5;
 }
 
+.gray-text:hover{
+    opacity: 1.0;
+}
+
 .red-text {
     color: red;
     opacity: 0.3;
+}
+
+.red-text:hover {
+    opacity: 1.0;
 }
 
 html,body {
