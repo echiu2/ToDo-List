@@ -1,7 +1,10 @@
 <div>
-    <div class="todo-content">
+  <div>
+    <%= if (current_user) { %>
+      <div class="todo-content">
         <%= partial("partials/navbar.plush.html") %>
-        <div class="d-flex pr-5">
+        <div class="d-flex pr-5 pl-5">
+              <h2>Welcome, <%= current_user.Email %></h2>
             <a class="ml-auto" href="<%= newTodoPath() %>"><button type="button" class="btn btn-dark mb-3 ml-auto btn-lg confirm-button">Add Task</button></a>
         </div>
         <div class="px-5">
@@ -57,4 +60,11 @@
             </table>
         </div>
     </div>
+    <% } else { %>
+      <div class="auth-center">
+        <a href="/signin" class="btn btn-primary">sign in</a>
+        <a href="/users/new" class="btn btn-success">register</a>
+      </div>
+    <% } %>
+  </div>
 </div>

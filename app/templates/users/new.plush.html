@@ -1,0 +1,12 @@
+<div class="auth-wrapper">
+  <div class="sign-form">
+    <h1>Register</h1>
+    <%= form_for(user, {action: usersPath(), method: "POST"}) { %>
+      <%= f.InputTag("Email") %>
+      <%= f.InputTag("Password", {type: "password"}) %>
+      <%= f.InputTag("Password confirmation", {type: "password"}) %>
+      <button class="btn btn-success">register!</button>
+    <% } %>
+  </div>
+</div>
+

@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/gobuffalo/validate/v3"
@@ -26,7 +25,6 @@ func (t Todo) TableName() string {
 }
 
 func (t *Todo) Validate() *validate.Errors {
-	fmt.Println(time.Now().Truncate(24 * time.Hour))
 	return validate.Validate(
 		&validators.StringIsPresent{Field: t.Title, Name: "Title", Message: "Title cannot be empty"},
 		&validators.StringLengthInRange{Field: t.Details, Name: "Details", Min: 10, Message: "Details length must be 10 or larger"},
