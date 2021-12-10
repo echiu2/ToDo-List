@@ -13,6 +13,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Completed Tasks</a>
                 </li>
+                <li class="nav-item">
+                    <%= form_for(current_user, {action: signoutPath(), method: "DELETE"}) { %>
+                        <input type="submit" value="Sign out" class="btn text-white">
+                    <% } %>
+                </li>
             </ul>
         </div>
     </nav>

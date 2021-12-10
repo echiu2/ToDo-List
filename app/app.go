@@ -8,6 +8,7 @@ import (
 
 var (
 	root *buffalo.App
+	ENV  = envy.Get("GO_ENV", "development")
 )
 
 // App creates a new application with default settings and reading
@@ -21,7 +22,7 @@ func New() *buffalo.App {
 	pop.Debug = true
 
 	root = buffalo.New(buffalo.Options{
-		Env:         envy.Get("GO_ENV", "development"),
+		Env:         ENV,
 		SessionName: "_todolist_session",
 	})
 
