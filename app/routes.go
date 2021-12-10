@@ -6,7 +6,6 @@ import (
 	"todolist/app/middleware"
 
 	"github.com/gobuffalo/buffalo"
-	csrf "github.com/gobuffalo/mw-csrf"
 )
 
 // SetRoutes for the application
@@ -14,7 +13,6 @@ func setRoutes(root *buffalo.App) {
 	root.Use(middleware.Transaction)
 	root.Use(middleware.ParameterLogger)
 	root.Use(middleware.CSRF)
-	root.Use(csrf.New)
 	root.Use(actions.Authorize)
 
 	root.GET("/", actions.Index)
