@@ -81,16 +81,22 @@ func IncompletedTaskMW(next buffalo.Handler) buffalo.Handler {
 func GuardEdit(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		fmt.Println("GuardEditMW")
-		if uid := c.Session().Get("current_user_id"); uid != nil {
-			todo := models.Todo{}
-			todoID := c.Param("todo_id")
-			tx := c.Value("tx").(*pop.Connection)
-			if err := tx.Find(&todo, todoID); err != nil {
-				return c.Error(http.StatusNotFound, errors.Wrap(err, "GuardEditMW - error while finding user's todo object"))
-			}
-			if todo.UserID != uid {
-				return c.Error(403, errors.New("GuardEditMW - you do not have access to this url or task"))
-			}
+
+		uid := c.Session().Get("current_user_id")
+		if uid == nil {
+			return c.Error(http.StatusForbidden, errors.New("GuardEditMW - current_user_id is not set"))
+		}
+
+		todo := models.Todo{}
+		todoID := c.Param("todo_id")
+		tx := c.Value("tx").(*pop.Connection)
+
+		if err := tx.Find(&todo, todoID); err != nil {
+			return c.Error(http.StatusNotFound, errors.Wrap(err, "GuardEditMW - error while finding user's todo object"))
+		}
+
+		if todo.UserID != uid {
+			return c.Error(http.StatusForbidden, errors.New("GuardEditMW - you do not have access and authorization to this url or task"))
 		}
 
 		return next(c)
