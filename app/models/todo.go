@@ -16,6 +16,7 @@ type Todo struct {
 	Details     string    `db:"details" json:"details"`
 	CreatedAt   time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
+	UserID      uuid.UUID `db:"user_id" json:"user_id"`
 }
 
 type Todos []Todo

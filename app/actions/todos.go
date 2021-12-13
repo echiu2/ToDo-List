@@ -1,21 +1,24 @@
 package actions
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 	"todolist/app/models"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop/v5"
+	"github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 )
 
 func Index(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	todos := models.Todos{}
+	uid := c.Session().Get("current_user_id")
 
-	if err := tx.All(&todos); err != nil {
-		return c.Error(http.StatusInternalServerError, err)
+	if err := tx.Where("user_id = (?)", uid).All(&todos); err != nil {
+		return c.Error(http.StatusNotFound, errors.Wrap(err, "Index - error while finding todo object"))
 	}
 
 	c.Set("todos", todos)
@@ -44,6 +47,11 @@ func SaveTask(c buffalo.Context) error {
 		c.Set("errors", verrs.Errors)
 		return c.Render(http.StatusUnprocessableEntity, r.HTML("todos/new.plush.html"))
 	}
+
+	uid := c.Session().Get("current_user_id")
+	userID := fmt.Sprintf("%v", uid)
+
+	todo.UserID = uuid.FromStringOrNil(userID)
 
 	tx := c.Value("tx").(*pop.Connection)
 
