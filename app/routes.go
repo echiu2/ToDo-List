@@ -13,10 +13,11 @@ func setRoutes(root *buffalo.App) {
 	root.Use(middleware.Transaction)
 	root.Use(middleware.ParameterLogger)
 	root.Use(middleware.CSRF)
-	root.Use(actions.Authorize)
+	root.Use(middleware.Authorize)
+	root.Use(middleware.IncompletedTaskMW)
 
 	root.GET("/", actions.Index)
-	root.Use(actions.SetCurrentUser)
+	root.Use(middleware.SetCurrentUser)
 	root.GET("/todo/new", actions.NewTask)
 	root.POST("/todo", actions.SaveTask).Name("createTaskPath")
 	root.GET("/todo/{todo_id}/edit", actions.EditTask)
@@ -28,6 +29,7 @@ func setRoutes(root *buffalo.App) {
 	root.POST("/signin", actions.AuthCreate)
 	root.DELETE("/signout", actions.AuthDestroy)
 
-	root.Middleware.Skip(actions.Authorize, actions.Index, actions.UsersNew, actions.UsersCreate, actions.AuthNew, actions.AuthCreate, actions.AuthDestroy)
+	root.Middleware.Skip(middleware.Authorize, actions.Index, actions.UsersNew, actions.UsersCreate, actions.AuthNew, actions.AuthCreate, actions.AuthDestroy)
+	root.Middleware.Skip(middleware.IncompletedTaskMW, actions.UsersNew, actions.UsersCreate, actions.AuthNew, actions.AuthCreate, actions.AuthDestroy)
 	root.ServeFiles("/", base.Assets)
 }
