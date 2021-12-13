@@ -4,6 +4,7 @@ package middleware
 
 import (
 	"fmt"
+	"net/http"
 	"todolist/app/models"
 
 	"github.com/gobuffalo/buffalo"
@@ -65,9 +66,9 @@ func IncompletedTaskMW(next buffalo.Handler) buffalo.Handler {
 		if uid := c.Session().Get("current_user_id"); uid != nil {
 			todos := models.Todos{}
 			tx := c.Value("tx").(*pop.Connection)
-			if err := tx.Where("user_id = (?)", uid).All(&todos); err != nil {
+			if err := tx.Where("user_id = (?) AND is_completed = false", uid).All(&todos); err != nil {
 				// note -- correct error management
-				return err
+				return c.Error(http.StatusNotFound, errors.Wrap(err, "IncompletedTaskMW - error while finding user's todo object"))
 			}
 			incompletedTask = len(todos)
 			c.Set("incompletedTask", incompletedTask)
