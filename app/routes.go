@@ -20,7 +20,7 @@ func setRoutes(root *buffalo.App) {
 	root.Use(middleware.SetCurrentUser)
 	root.GET("/todo/new", actions.NewTask)
 	root.POST("/todo", actions.SaveTask).Name("createTaskPath")
-	root.GET("/todo/{todo_id}/edit", actions.EditTask)
+	root.GET("/todo/{todo_id}/edit", middleware.GuardEdit(actions.EditTask))
 	root.PUT("/todo/{todo_id}", actions.UpdateTask)
 	root.DELETE("/todo/{todo_id}", actions.DeleteTask)
 	root.GET("/users/new", actions.UsersNew)
