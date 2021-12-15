@@ -8,6 +8,9 @@
             <a class="ml-auto" href="<%= newTodoPath() %>"><button type="button" class="btn btn-dark mb-3 ml-auto btn-lg confirm-button">Add Task</button></a>
         </div>
         <div class="px-5">
+          <%= if (len(todos) == 0) { %>
+            <p>No current tasks needs to be done at the moment.</p>
+          <% } else { %>
             <table class="table">
                 <thead>
                 <tr class="text-white">
@@ -17,47 +20,48 @@
                 </tr>
                 </thead>
                 <tbody>
-                <%= for (index, todo) in todos { %>
-                    <tr>
-                        <td scope="row"><i class="fas fa-check-circle mr-3 gray-text"></i>
-                            <a href="<%= editTodoPath({todo_id: todo.ID}) %>" class="task-color task-button">
-                                <%= todo.Title %>
-                            </a>
-                        </td>
-                        <td class="deadline"><%= todo.Deadline.Format("02 Jan 2006") %></td>
-                        <td>
-                            <a href="<%= editTodoPath({todo_id: todo.ID}) %>">
-                                <i class="fas fa-pencil-alt mr-3 gray-text"></i>
-                            </a>
-                            <a type="button" data-toggle="modal" data-target="#deleteTaskModal-<%= index %>">
-                                <i class="fas fa-trash-alt red-text"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <div class="modal fade" id="deleteTaskModal-<%= index %>" tabindex="-1" role="dialog" aria-labelledby="deleteTaskModalLabel-<%= index %>" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h3 class="modal-title" id="deleteTaskModalLabel-<%= index %>">Delete Task</h3>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body content">
-                              Are you sure you want to delete this task?
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                              <%= form_for(todo, {action: todoPath({todo_id: todo.ID}), method: "DELETE"}) { %>
-                                <button type="submit" class="btn btn-primary confirm-button">Delete</button>
-                              <% } %>
+                  <%= for (index, todo) in todos { %>
+                      <tr>
+                          <td scope="row"><i class="fas fa-check-circle mr-3 gray-text"></i>
+                              <a href="<%= editTodoPath({todo_id: todo.ID}) %>" class="task-color task-button">
+                                  <%= todo.Title %>
+                              </a>
+                          </td>
+                          <td class="deadline"><%= todo.Deadline.Format("02 Jan 2006") %></td>
+                          <td>
+                              <a href="<%= editTodoPath({todo_id: todo.ID}) %>">
+                                  <i class="fas fa-pencil-alt mr-3 gray-text"></i>
+                              </a>
+                              <a type="button" data-toggle="modal" data-target="#deleteTaskModal-<%= index %>">
+                                  <i class="fas fa-trash-alt red-text"></i>
+                              </a>
+                          </td>
+                      </tr>
+                      <div class="modal fade" id="deleteTaskModal-<%= index %>" tabindex="-1" role="dialog" aria-labelledby="deleteTaskModalLabel-<%= index %>" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h3 class="modal-title" id="deleteTaskModalLabel-<%= index %>">Delete Task</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body content">
+                                Are you sure you want to delete this task?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <%= form_for(todo, {action: todoPath({todo_id: todo.ID}), method: "DELETE"}) { %>
+                                  <button type="submit" class="btn btn-primary confirm-button">Delete</button>
+                                <% } %>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                    </div>
-                <% } %>
+                      </div>
+                  <% } %>
                 </tbody>
             </table>
+            <% } %>
         </div>
     </div>
     <% } else { %>

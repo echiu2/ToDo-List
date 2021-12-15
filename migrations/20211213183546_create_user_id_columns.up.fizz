@@ -1,2 +1,2 @@
 add_column("todos", "user_id", "uuid", {})
-add_foreign_Key("todos", "user_id", {users: ["id"]}, {})
+add_foreign_key("todos", "user_id", {users: ["id"]}, {})

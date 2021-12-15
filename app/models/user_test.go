@@ -1,94 +1,47 @@
-// models/user_test.go
-package models_test
+package models
 
-import (
-	"io/fs"
-	"todolist/app/models"
-
-	"github.com/gobuffalo/pop/v5"
-	"github.com/stretchr/testify/require"
-	"github.com/stretchr/testify/suite"
-)
-
-// Model suite
-type ModelSuite struct {
-	suite.Suite
-	*require.Assertions
-	DB       *pop.Connection
-	Fixtures fs.FS
-}
-
-func (ms *ModelSuite) Test_User_Create() {
-	count, err := ms.DB.Count("users")
-	ms.NoError(err)
-	ms.Equal(0, count)
-
-	u := &models.User{
-		Email:                "mark@example.com",
-		Password:             "password",
-		PasswordConfirmation: "password",
+func (ms *ModelSuite) Test_User_FullName() {
+	// 1. Arrange
+	tcases := []struct { // table-driven tests
+		User           User
+		IsErr          bool
+		ExpectedResult string
+	}{
+		{
+			User:           User{FirstName: "Joe", LastName: "Arias"},
+			IsErr:          false,
+			ExpectedResult: "Joe Arias",
+		},
+		{
+			User:           User{FirstName: "Joe", LastName: "   "},
+			IsErr:          true,
+			ExpectedResult: "",
+		},
+		{
+			User:           User{FirstName: "", LastName: ""},
+			IsErr:          true,
+			ExpectedResult: "",
+		},
+		{
+			User:           User{FirstName: "", LastName: "Arias"},
+			IsErr:          true,
+			ExpectedResult: "",
+		},
 	}
-	ms.Zero(u.PasswordHash)
 
-	verrs, err := u.Create(ms.DB)
-	ms.NoError(err)
-	ms.False(verrs.HasAny())
-	ms.NotZero(u.PasswordHash)
+	for index, tc := range tcases {
+		// 2. Act
+		fullName, err := tc.User.FullName()
 
-	count, err = ms.DB.Count("users")
-	ms.NoError(err)
-	ms.Equal(1, count)
-}
+		// 3. Assert
+		if tc.IsErr {
+			ms.Error(err, "Case#: %v", index)
+			ms.Equal("First or last names should not be empty", err.Error(), "Case#: ", index)
 
-func (ms *ModelSuite) Test_User_Create_ValidationErrors() {
-	count, err := ms.DB.Count("users")
-	ms.NoError(err)
-	ms.Equal(0, count)
+			continue
+		}
 
-	u := &models.User{
-		Password: "password",
+		ms.NoError(err, "Case#: %v", index)
+		ms.Equal(tc.ExpectedResult, fullName, "Case#: %v", index)
 	}
-	ms.Zero(u.PasswordHash)
-
-	verrs, err := u.Create(ms.DB)
-	ms.NoError(err)
-	ms.True(verrs.HasAny())
-
-	count, err = ms.DB.Count("users")
-	ms.NoError(err)
-	ms.Equal(0, count)
-}
-
-func (ms *ModelSuite) Test_User_Create_UserExists() {
-	count, err := ms.DB.Count("users")
-	ms.NoError(err)
-	ms.Equal(0, count)
-
-	u := &models.User{
-		Email:                "mark@example.com",
-		Password:             "password",
-		PasswordConfirmation: "password",
-	}
-	ms.Zero(u.PasswordHash)
-
-	verrs, err := u.Create(ms.DB)
-	ms.NoError(err)
-	ms.False(verrs.HasAny())
-	ms.NotZero(u.PasswordHash)
-
-	count, err = ms.DB.Count("users")
-	ms.NoError(err)
-	ms.Equal(1, count)
-
-	u = &models.User{
-		Email:    "mark@example.com",
-		Password: "password",
-	}
-	verrs, err = u.Create(ms.DB)
-	ms.NoError(err)
-	ms.True(verrs.HasAny())
-
-	count, err = ms.DB.Count("users")
-	ms.NoError(err)
-	ms.Equal(1, count)
 }
