@@ -183,15 +183,18 @@ func (as ActionSuite) Test_Submit_NewTask_Form() {
 
 	as.Session.Set("current_user_id", userA.ID)
 
-	validTask := url.Values{
-		"Deadline":    []string{"2021-12-14"},
-		"IsCompleted": []string{"false"},
-		"Title":       []string{"test123"},
-		"Details":     []string{"test123456"},
+	task := models.Todo{
+		Deadline:    time.Date(2021, 12, 22, 0, 0, 0, 0, time.UTC),
+		IsCompleted: false,
+		Title:       "Test123",
+		Details:     "Test123456",
+		UserID:      userA.ID,
 	}
 
-	res := as.HTML("/todo").Post(validTask)
+	res := as.HTML("/todo/").Post(&task)
 	as.Equal(http.StatusSeeOther, res.Code)
+	as.NoError(as.DB.Create(&task))
+	as.NoError(as.DB.Where("id = ?", task.ID).First(&models.Todo{}))
 
 	notValidTasks := []url.Values{
 		{
@@ -209,7 +212,6 @@ func (as ActionSuite) Test_Submit_NewTask_Form() {
 	}
 
 	for _, v := range notValidTasks {
-		fmt.Println("where am i printing this", v)
 		check := as.HTML("/todo").Post(v)
 		as.Equal(http.StatusUnprocessableEntity, check.Code)
 	}
